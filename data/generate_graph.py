@@ -17,7 +17,7 @@ def generate_graph(n_nodes, filename):
         json.dump({"positions": positions, "graph": graph}, f)
 
 if __name__ == "__main__":
-    os.makedirs(".", exist_ok=True)
-    generate_graph(100, "graphs_100.json")
-    generate_graph(500, "graphs_500.json")
-    generate_graph(1000, "graphs_1000.json")
+    generate_graph(100, "data/graphs_100.json")
+    generate_graph(500, "data/graphs_500.json")
+    generate_graph(1000, "data/graphs_1000.json")
+

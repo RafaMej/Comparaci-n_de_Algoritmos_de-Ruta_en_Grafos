@@ -1,16 +1,19 @@
+import sys, os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
 import json, csv, random
 from src.graph import Graph
 from src.dijkstra import dijkstra
 from src.astar import astar
 from src.uniform_cost import uniform_cost
 
-DATASETS = [
-    "../data/graphs_100.json",
-    "../data/graphs_500.json",
-    "../data/graphs_1000.json"
-]
+OUTPUT = os.path.join(os.path.dirname(__file__), "results.csv")
 
-OUTPUT = "results.csv"
+DATASETS = [
+    "data/graphs_100.json",
+    "data/graphs_500.json",
+    "data/graphs_1000.json"
+]
 
 def load_graph(path):
     with open(path) as f:
@@ -21,9 +24,13 @@ def load_graph(path):
             g.add_edge(int(u), int(v), float(w))
     return g, {int(k): tuple(v) for k, v in data["positions"].items()}
 
-with open(OUTPUT, "w", newline="") as f:
+file_exists = os.path.exists(OUTPUT)
+
+with open(OUTPUT, "a", newline="") as f:   # modo append
     writer = csv.writer(f)
-    writer.writerow(["dataset", "start", "goal", "algo", "cost", "visited", "time"])
+
+    if not file_exists:
+        writer.writerow(["dataset", "start", "goal", "algo", "cost", "visited", "time"])
 
     for dataset in DATASETS:
         g, positions = load_graph(dataset)
