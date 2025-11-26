@@ -29,4 +29,3 @@ experiments/results.csv
 - Número de expansiones (nodos visitados)
 - Costo total del camino
 
-Listo para análisis en el reporte PDF.
